@@ -1,0 +1,31 @@
+@base=http://localhost:8089
+
+### Create a new item
+
+POST {{base}}/scrape
+Content-Type: application/json
+
+{
+  "url": "https://www.ebay.com/itm/145309888550?hash=item21d524f026",
+  "name":"Ebay"
+}
+
+### Get latest prices
+
+GET {{base}}/latest
+
+### Get URL price
+
+GET {{base}}/prices?url=https://www.ebay.com/itm/145309888550?hash=item21d524f026
+
+### Get oldest prices
+
+GET {{base}}/oldest
+
+### Max price
+
+GET {{base}}/website_max_price?name=Ebay
+
+### Website prices
+
+GET {{base}}/website_prices?name=Ebay
