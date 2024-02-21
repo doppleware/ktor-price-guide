@@ -12,14 +12,14 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 
 
-    fun savePriceRecord(urlWebsite: Website, urlPrice: String) {
+    fun savePriceRecord(urlWebsite: Website, urlPrice: Int) {
 
         val currentMoment= Clock.System.now()
         val datetimeInUtc: LocalDateTime = currentMoment.toLocalDateTime(TimeZone.UTC)
         transaction() {
             val website = PriceRecord.new {
                 timeStamp = datetimeInUtc
-                price = ridiculouslySimplePriceExtractor( urlPrice)
+                price =  urlPrice
                 website = urlWebsite
 
             }

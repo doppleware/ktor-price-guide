@@ -1,5 +1,12 @@
 package com.example.consumers
 
+import com.example.domain.createOrGetWebsite
+import com.example.domain.savePriceRecord
+import com.example.domain.scrapeEbayPrice
+import com.example.dtos.ScrapeRequest
+import com.example.dtos.ScrapingTarget
+import com.example.plugins.Website
+import io.ktor.server.application.*
 import io.opentelemetry.api.trace.Span
 import io.opentelemetry.instrumentation.annotations.WithSpan
 import it.skrape.core.htmlDocument
@@ -8,25 +15,20 @@ import it.skrape.fetcher.response
 import it.skrape.fetcher.skrape
 import it.skrape.selects.html5.div
 import it.skrape.selects.html5.span
+import pl.jutupe.ktor_rabbitmq.consume
+import pl.jutupe.ktor_rabbitmq.rabbitConsumer
 
-//fun Application.configureScapeConsumer( scrapeLogic: ScrapeLogic) {
-//    rabbitConsumer {
-//        consume<ScrapingTarget>("queue") { body ->
-////            async {
-////                val price = scrapeLogic.scrapePrice(body.url)
-////
-////            }
-//                dbQuery{
-//                    Website.new {
-//                        name = "Ebay"
-//                        url="https://www.ebay.com/itm/145309888550?hash=item21d524f026"
-//                    }
-//                }
-//              val price = scrapeLogic.scrapePrice(body.url)
-//
-//        }
-//    }
-//}
+fun Application.configureScapeConsumer(scrapeLogic: ScrapeLogic) {
+    rabbitConsumer {
+        consume<ScrapeRequest>("queue") { scrapeRequest ->
+
+            val website = createOrGetWebsite(scrapeRequest)
+            val price = scrapeEbayPrice(scrapeRequest.url)
+            savePriceRecord(website, price)
+
+        }
+    }
+}
 
 interface ScrapeLogic{
       fun scrapePrice(scrapeUrl: String): String

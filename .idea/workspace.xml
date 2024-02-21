@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04284bb3-111a-4ac1-af34-3b5103c99bd4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/example/domain/EbayScrapingLogic.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/example/dtos/ScrapingTarget.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requests.http" beforeDir="false" afterPath="$PROJECT_DIR$/requests.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/example/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/example/Application.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/example/consumers/ScrapeConsumer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/example/consumers/ScrapeConsumer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/example/controllers/ScrapeController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/example/controllers/ScrapeController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/example/domain/WebsitePriceRepo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/example/domain/WebsitePriceRepo.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +178,8 @@
     &quot;Gradle.KtorTest.test.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.RoutingKtTest.executor&quot;: &quot;Debug&quot;,
     &quot;Gradle.RoutingKtTest.testGet.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.WebPriceScapingTests.shoudlScrapeProductPriceFromUrl.executor&quot;: &quot;Debug&quot;,
+    &quot;Gradle.WebPriceScapingTests.shoudlScrapeProductPriceFromUrl.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ktor-price-guide [run].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.ktor-sample [buildFatJar].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.ktor-sample [runFatJar].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.ktor-sample [run].executor&quot;: &quot;Run&quot;,
@@ -181,6 +189,7 @@
     &quot;HTTP Request.requests | Get latest prices.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.requests | Get oldest prices.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.requests | Max price.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.requests | Scrape a url.executor&quot;: &quot;Run&quot;,
     &quot;HTTP Request.requests | Website prices.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -209,8 +218,8 @@
       <recent name="com.example" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.requests | Website prices">
-    <configuration name="ktor-sample [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="HTTP Request.requests | Scrape a url">
+    <configuration name="WebPriceScapingTests.shoudlScrapeProductPriceFromUrl" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -221,10 +230,39 @@
         </option>
         <option name="taskNames">
           <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.example.WebPriceScapingTests.shoudlScrapeProductPriceFromUrl&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ktor-price-guide [run]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="env">
+          <map>
+            <entry key="OTEL_RESOURCE_ATTRIBUTES" value="digma.environment=RABBIT" />
+          </map>
+        </option>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
             <option value="run" />
           </list>
         </option>
-        <option name="vmOptions" value="" />
+        <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
@@ -232,16 +270,13 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="requests | Get URL price" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="3" requestIdentifier="Get URL price" runType="Run single request">
+    <configuration name="requests | Create a new item" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" requestIdentifier="Create a new item" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="requests | Get oldest prices" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="4" requestIdentifier="Get oldest prices" runType="Run single request">
+    <configuration name="requests | Get latest prices" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="2" requestIdentifier="Get latest prices" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="requests | Max price" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="5" requestIdentifier="Max price" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="requests | Website prices" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" index="6" requestIdentifier="Website prices" runType="Run single request">
+    <configuration name="requests | Scrape a url" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/requests.http" requestIdentifier="Scrape a url" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
@@ -279,20 +314,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.ktor-sample [run]" />
-      <item itemvalue="HTTP Request.requests | Get URL price" />
-      <item itemvalue="HTTP Request.requests | Get oldest prices" />
-      <item itemvalue="HTTP Request.requests | Max price" />
-      <item itemvalue="HTTP Request.requests | Website prices" />
+      <item itemvalue="Gradle.WebPriceScapingTests.shoudlScrapeProductPriceFromUrl" />
+      <item itemvalue="Gradle.ktor-price-guide [run]" />
+      <item itemvalue="HTTP Request.requests | Scrape a url" />
+      <item itemvalue="HTTP Request.requests | Create a new item" />
+      <item itemvalue="HTTP Request.requests | Get latest prices" />
       <item itemvalue="Ktor.Unnamed" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.requests | Website prices" />
-        <item itemvalue="Gradle.ktor-sample [run]" />
-        <item itemvalue="HTTP Request.requests | Max price" />
-        <item itemvalue="HTTP Request.requests | Get oldest prices" />
-        <item itemvalue="HTTP Request.requests | Get URL price" />
+        <item itemvalue="HTTP Request.requests | Scrape a url" />
+        <item itemvalue="Gradle.ktor-price-guide [run]" />
+        <item itemvalue="HTTP Request.requests | Create a new item" />
+        <item itemvalue="Gradle.WebPriceScapingTests.shoudlScrapeProductPriceFromUrl" />
+        <item itemvalue="HTTP Request.requests | Get latest prices" />
       </list>
     </recent_temporary>
   </component>
@@ -321,7 +356,11 @@
       <workItem from="1705953483648" duration="107000" />
       <workItem from="1705958264496" duration="35258000" />
       <workItem from="1706007286307" duration="37000" />
-      <workItem from="1706007406028" duration="783000" />
+      <workItem from="1706007406028" duration="7090000" />
+      <workItem from="1706032517436" duration="2296000" />
+      <workItem from="1707209044195" duration="2144000" />
+      <workItem from="1707238841278" duration="319000" />
+      <workItem from="1707759925986" duration="7114000" />
     </task>
     <servers />
   </component>

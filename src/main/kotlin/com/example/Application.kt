@@ -2,6 +2,7 @@ package com.example
 
 import com.example.consumers.ScrapeLogic
 import com.example.consumers.ScrapeLogicImpl
+import com.example.consumers.configureScapeConsumer
 import com.example.controllers.configureInternalController
 import com.example.controllers.configurePriceController
 import com.example.plugins.*
@@ -42,6 +43,7 @@ fun Application.module() {
     val scrapeLogic by inject<ScrapeLogic>()
 
     configureRabbitMQ()
+    configureScapeConsumer(scrapeLogic)
     configureSerialization()
     configureData()
     configureRouting()

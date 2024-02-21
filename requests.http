@@ -1,6 +1,6 @@
 @base=http://localhost:8089
 
-### Create a new item
+### Scrape a url
 
 POST {{base}}/scrape
 Content-Type: application/json

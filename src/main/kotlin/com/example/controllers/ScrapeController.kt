@@ -4,6 +4,7 @@ import com.example.consumers.ScrapeLogic
 import com.example.domain.createOrGetWebsite
 import com.example.domain.ridiculouslySimplePriceFormatter
 import com.example.domain.savePriceRecord
+import com.example.domain.scrapeEbayPrice
 import com.example.dtos.PriceRecordDto
 import com.example.dtos.ScrapeRequest
 import com.example.helpers.dbQuery
@@ -24,6 +25,7 @@ import org.jetbrains.exposed.sql.SortOrder
 import org.jetbrains.exposed.sql.SortOrder.DESC
 import org.jetbrains.exposed.sql.max
 import org.jetbrains.exposed.sql.transactions.transaction
+import pl.jutupe.ktor_rabbitmq.publish
 
 //import io.ktor.client.*
 //import io.ktor.client.request.*
@@ -129,6 +131,24 @@ fun Application.configurePriceController(scrapeLogic: ScrapeLogic) {
             }
 
             call.respond( response)
+
+        }
+
+        post("/scrape"){
+//            var scrapeRequest =call.receive<ScrapeRequest>();
+//
+//            val urlWebsite = createOrGetWebsite(scrapeRequest)
+//
+//            var price = scrapeEbayPrice(scrapeRequest.url)
+//            savePriceRecord(urlWebsite, price)
+//
+//
+//
+            var scrapeRequest =call.receive<ScrapeRequest>();
+            call.publish("exchange", "routingKey",null, scrapeRequest)
+
+            call.respond(HttpStatusCode.OK)
+
 
         }
 
